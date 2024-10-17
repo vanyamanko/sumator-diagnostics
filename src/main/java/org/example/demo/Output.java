@@ -28,4 +28,12 @@ public class Output {
     public void setP2(int p2) {
         this.p2 = p2;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Output output = (Output) obj;
+        return s1 == output.s1 && s2 == output.s2 && p2 == output.p2;
+    }
 }

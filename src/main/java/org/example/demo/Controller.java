@@ -1,66 +1,90 @@
 package org.example.demo;
 
-public class Controller {
-    ErrorUI errorUI = new ErrorUI();
+import java.util.Set;
 
-    public void stringToIntData(String input) {
+public class Controller {
+    org.example.demo.ui.ErrorUI errorUI = new org.example.demo.ui.ErrorUI();
+
+    public boolean stringToIntData(String input, Set<String> set) {
         if (input.length() == 5 && input.matches("[01]+")) {
             int a1 = Character.getNumericValue(input.charAt(0));
             int b1 = Character.getNumericValue(input.charAt(1));
             int pPrev = Character.getNumericValue(input.charAt(2));
             int a2 = Character.getNumericValue(input.charAt(3));
             int b2 = Character.getNumericValue(input.charAt(4));
-            calculateOutPut(a1, b1, pPrev, a2, b2);
-            System.out.println("a1: " + a1 + ", b1: " + b1 + ", pPrev: " + pPrev + ", a2: " + a2 + ", b2: " + b2);
+            calculateOutPut(a1, b1, pPrev, a2, b2, set);
         } else {
             errorUI.showErrorDialog("Incorrect input.");
+            return false;
         }
+        return true;
     }
 
-    private void calculateOutPut(int point1, int point2, int point3, int point21, int point22) {
-        int point4 = point1;
-        int point5 = point2;
-        int point6 = point3;
-        int point7 = point4 ^ point5 ^ point6;
+    private void calculateOutPut(int a1, int b1, int pPrev, int a2, int b2, Set<String> set) {
 
+        for (int i = 1; i <= 39; i++) {
+            for (int j = 0; j <= 1; j++) {
+                int point1 = (i == 1) ? j : a1;
+                int point2 = (i == 2) ? j : b1;
+                int point3 = (i == 3) ? j : pPrev;
+                int point21 = (i == 21) ? j : a2;
+                int point22 = (i == 22) ? j : b2;
 
-        int point8 = point1;
-        int point9 = point2;
-        int point10 = point3;
+                int point4 = (i == 4) ? j : point1;
+                int point5 = (i == 5) ? j : point2;
+                int point6 = (i == 6) ? j : point3;
+                int point7 = (i == 7) ? j : (point4 ^ point5 ^ point6);
 
-        int point11 = point9;
-        int point12 = point8;
-        int point17 = point11 & point12;
+                int point8 = (i == 8) ? j : point1;
+                int point9 = (i == 9) ? j : point2;
+                int point10 = (i == 10) ? j : point3;
 
-        int point13 = point8;
-        int point14 = point10;
-        int point15 = point9;
-        int point16 = point10;
-        int point18 = point13 & point14;
-        int point19 = point15 & point16;
-        int point20 = point17 | point18 | point19;
+                int point11 = (i == 11) ? j : point9;
+                int point12 = (i == 12) ? j : point8;
+                int point17 = (i == 17) ? j : (point11 & point12);
 
-        int point23 = point21;
-        int point24 = point22;
-        int point25 = point20;
-        int point26 = point23 ^ point24 ^ point25;
+                int point13 = (i == 13) ? j : point8;
+                int point14 = (i == 14) ? j : point10;
+                int point15 = (i == 15) ? j : point9;
+                int point16 = (i == 16) ? j : point10;
+                int point18 = (i == 18) ? j : (point13 & point14);
+                int point19 = (i == 19) ? j : (point15 & point16);
+                int point20 = (i == 20) ? j : (point17 | point18 | point19);
 
-        int point27 = point21;
-        int point28 = point22;
-        int point29 = point20;
+                int point23 = (i == 23) ? j : point21;
+                int point24 = (i == 24) ? j : point22;
+                int point25 = (i == 25) ? j : point20;
+                int point26 = (i == 26) ? j : (point23 ^ point24 ^ point25);
 
-        int point30 = point28;
-        int point31 = point27;
-        int point36 = point30 & point31;
-        int point32 = point27;
-        int point33 = point29;
-        int point37 = point32 ^ point33;
+                int point27 = (i == 27) ? j : point21;
+                int point28 = (i == 28) ? j : point22;
+                int point29 = (i == 29) ? j : point20;
 
-        int point34 = point28;
-        int point35 = point29;
-        int point38 = point35 ^ point34;
+                int point30 = (i == 30) ? j : point28;
+                int point31 = (i == 31) ? j : point27;
+                int point36 = (i == 36) ? j : (point30 & point31);
+                int point32 = (i == 32) ? j : point27;
+                int point33 = (i == 33) ? j : point29;
+                int point37 = (i == 37) ? j : (point32 ^ point33);
 
-        int point39 = point36 ^ point37 ^ point38;
+                int point34 = (i == 34) ? j : point28;
+                int point35 = (i == 35) ? j : point29;
+                int point38 = (i == 38) ? j : (point35 ^ point34);
+
+                int point39 = (i == 39) ? j : (point36 ^ point37 ^ point38);
+
+                Output output = new Output();
+                Output outputCorrectly = calculateOutPutCorrectly(a1, b1, pPrev, a2, b2);
+
+                output.setS1(point7);
+                output.setS2(point26);
+                output.setP2(point39);
+
+                if (!output.equals(outputCorrectly)) {
+                    set.add(String.format("%d(%d)", i, j));
+                }
+            }
+        }
     }
 
 
