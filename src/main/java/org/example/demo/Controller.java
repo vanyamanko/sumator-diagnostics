@@ -3,7 +3,7 @@ package org.example.demo;
 import java.util.Set;
 
 public class Controller {
-    org.example.demo.ui.ErrorUI errorUI = new org.example.demo.ui.ErrorUI();
+    private ErrorUI errorUI = new ErrorUI();
 
     public boolean stringToIntData(String input, Set<String> set) {
         if (input.length() == 5 && input.matches("[01]+")) {
@@ -65,13 +65,13 @@ public class Controller {
                 int point36 = (i == 36) ? j : (point30 & point31);
                 int point32 = (i == 32) ? j : point27;
                 int point33 = (i == 33) ? j : point29;
-                int point37 = (i == 37) ? j : (point32 ^ point33);
+                int point37 = (i == 37) ? j : (point32 & point33);
 
                 int point34 = (i == 34) ? j : point28;
                 int point35 = (i == 35) ? j : point29;
-                int point38 = (i == 38) ? j : (point35 ^ point34);
+                int point38 = (i == 38) ? j : (point35 & point34);
 
-                int point39 = (i == 39) ? j : (point36 ^ point37 ^ point38);
+                int point39 = (i == 39) ? j : (point36 | point37 | point38);
 
                 Output output = new Output();
                 Output outputCorrectly = calculateOutPutCorrectly(a1, b1, pPrev, a2, b2);
@@ -99,9 +99,9 @@ public class Controller {
         int s2 = a2 ^ b2 ^ p;
 
         int point36 = b2 & a2;
-        int point37 = a2 ^ p;
-        int point38 = b2 ^ p;
-        int p2 = point36 ^ point37 ^ point38;
+        int point37 = a2 & p;
+        int point38 = b2 & p;
+        int p2 = point36 | point37 | point38;
         Output output = new Output();
         output.setS1(s1);
         output.setS2(s2);

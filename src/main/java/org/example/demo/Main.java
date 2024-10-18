@@ -41,7 +41,6 @@ public class Main extends Application {
         displayArea.setEditable(false);
 
         Label secondaryDisplayLabel = new Label("Покрытве точки:");
-        Label pointNotСatch = new Label("Неисправности не восможно отследить: 29(0), 29(1)");
         TextArea secondaryDisplayArea = new TextArea();
         secondaryDisplayArea.setEditable(false);
 
@@ -78,11 +77,11 @@ public class Main extends Application {
                     secondaryDisplayArea.appendText(str + "\n");
                 }
                 inputField.clear();
-//                }
-            }
+                }
+//            }
         });
 
-        textBox.getChildren().addAll(inputLabel, inputField, displayLabel, displayArea, secondaryDisplayLabel, secondaryDisplayArea, clearButton, pointNotСatch);
+        textBox.getChildren().addAll(inputLabel, inputField, displayLabel, displayArea, secondaryDisplayLabel, secondaryDisplayArea, clearButton);
 
         File imageFile = new File("sumator/sumator.png");
         Image image = new Image(imageFile.toURI().toString());
