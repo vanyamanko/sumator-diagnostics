@@ -36,15 +36,15 @@ public class Main extends Application {
         Label inputLabel = new Label("a1 b1 p(i-1) a2 b2");
         TextField inputField = new TextField();
 
-        Label displayLabel = new Label("Наборы:");
+        Label displayLabel = new Label("Binary inputs:");
         TextArea displayArea = new TextArea();
         displayArea.setEditable(false);
 
-        Label secondaryDisplayLabel = new Label("Покрытве точки:");
+        Label secondaryDisplayLabel = new Label("Covered points:");
         TextArea secondaryDisplayArea = new TextArea();
         secondaryDisplayArea.setEditable(false);
 
-        Button clearButton = new Button("Очистить");
+        Button clearButton = new Button("Clear");
         clearButton.setStyle(BUTTON_STYLE);
         clearButton.setPrefWidth(150);
         clearButton.setOnAction(event -> {
@@ -55,10 +55,8 @@ public class Main extends Application {
         });
 
         inputField.setOnAction(event -> {
-//            for(int i = 0; i< 32; i++) {
 
             String inputText = inputField.getText();
-//                inputText = String.format("%5s", Integer.toBinaryString(i)).replace(' ', '0');
             Controller controller = new Controller();
             if (controller.stringToIntData(inputText, set)) {
                 displayArea.appendText(inputText + "  --  " + set.size() + "/" + "78" + "\n");
@@ -77,8 +75,7 @@ public class Main extends Application {
                     secondaryDisplayArea.appendText(str + "\n");
                 }
                 inputField.clear();
-                }
-//            }
+            }
         });
 
         textBox.getChildren().addAll(inputLabel, inputField, displayLabel, displayArea, secondaryDisplayLabel, secondaryDisplayArea, clearButton);
